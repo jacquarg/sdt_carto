@@ -1,0 +1,390 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Lato', Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  color: #666;
+}
+
+
+a {
+  color: #0088cc;
+  text-decoration: none;
+}
+a:hover, a:focus {
+  color: #005580;
+  text-decoration: underline;
+}
+
+a:hover, a:active {
+  outline: 0;
+}
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* preamble */
+h1 {
+  color: #aaaaaa;
+  font-family: "Grand Hotel", cursive;
+  font-size: 40px;
+  line-height: 41.5px;
+  margin: 0;
+  text-align: center;
+  margin-top: 33px;
+
+  margin-top: 50px;
+  margin-bottom: 5px;
+}
+
+#preamble {
+  margin: 40px 20px;
+}
+
+#preamble img {
+  max-height: 200px;
+  float: left;
+  margin: 20px;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* tools */
+
+#period_filter {
+  font-size: 20px;
+
+}
+
+
+label[for=word_filter] {
+  display: block;
+}
+
+#word_filter {
+  width: 160px;
+  left: 20px;
+  top:20px;
+
+  /*! background: white; */
+  border:  0;
+  border-radius: 2px;
+  padding: 5px;
+  z-index: 2000;
+}
+
+#word_filter_submit {
+  left: 173px;
+  top: 25px;
+  z-index: 2001;
+
+}
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* datasets list. */
+#documentation > .typology {
+  clear: both;
+}
+
+#documentation h3 {
+  text-align: center;
+  font-family: 'Grand Hotel', cursive;
+  font-size: 50px;
+  color: #aaaaaa;
+  line-height: 41.5px;
+}
+
+#documentation .toggle {
+  cursor: pointer;
+  display: inline-block;
+}
+
+ul.datasets {
+  padding: 0;
+}
+
+.datasets li {
+  list-style: none;
+}
+
+li.subject {
+  display: none;
+}
+
+
+.datasets li.active.compact {
+  display: inline-block;
+  padding: 20px;
+}
+
+.datasets li.active.expanded {
+  display: block;
+  width: 100%;
+  padding: 20px;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* ideationcard */
+
+.ideationcard {
+  position: relative;
+  width: 270px;
+  height: 380px;
+  border: 0.5px solid #eee;
+  box-sizing: border-box;
+  padding: 20px;
+
+}
+
+.ideationcard .typology {
+  color: white;
+  font-family: "Grand Hotel", cursive;
+  font-size: 30px;
+  padding: 8px;
+  position: absolute;
+  width: 230px;
+  top: 20px;
+  left: 20px;
+  height: 54px;
+}
+
+.ideationcard .name {
+  /*! margin: 20px 0 20px 0; */
+  text-align: center;
+  font-family: 'Lato', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  color: #555;
+  height: 95px;
+  width: 230px;
+  position: absolute;
+  top: 94px;
+}
+
+.ideationcard .name span {
+}
+
+.ideationcard .description {
+  width: 230px;
+  height: 113px;
+  font-size: 15px;
+  line-height: 20px;
+  position: absolute;
+  top: 210px;
+}
+
+.ideationcard .holder {
+  position: absolute;
+  right: 20px;
+  bottom: 26px;
+  height: 30px;
+}
+
+.ideationcard .frequency {
+  position: absolute;
+  bottom: 26px;
+  left: 19px;
+}
+
+.ideationcard .frequency span {
+  font-size: 12px;
+  color: #999;
+}
+
+.ideationcard .frequency img {
+  width: 23px;
+  color: #999;
+  padding-right: 4px;
+}
+
+
+.ideationcard .soon {
+  background: #999;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top:0;
+  left: 0;
+  opacity: 0.6;
+  
+}
+.ideationcard .soon > div {
+  transform: rotate(45deg);
+  position: absolute;
+  left: 0%;
+  top: 200px;
+  font-size: 35px;
+  color: black;
+  text-align: center;
+}
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* prop tables */
+
+.compact .details {
+  display: none;
+
+}
+
+.expanded .details {
+  display: inline-block;
+  width: calc(100% - 310px);
+}
+
+.details {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+#documentation table {
+  width: 100%;
+  border: 1px solid #dddddd;
+
+  border-spacing: 0px;
+
+  font-family: gothamrnd, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+#documentation tbody tr:nth-of-type(odd) {
+      background-color:#f9f9f9;
+}
+#documentation th,
+#documentation td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  vertical-align: top;
+  padding: 8px;
+ /*! border-collapse: separate; */
+  /*! font-size: 14px; */
+  word-break: break-all;
+}
+#documentation th {
+  font-size: 18px;
+  width: calc(100% / 4);
+}
+#documentation td {
+  line-height: 1.2em;
+
+}
+#documentation td.nom {
+  font-weight: bold;
+  font-size:18px;
+  /*! width: 20%; */
+  /*! word-break: keep-all; */
+  vertical-align: middle;
+  width:  25%;
+}
+#documentation td.description {
+  /*! min-width: 30%; */
+  width:  40%;
+}
+
+#documentation td.exemple {
+  color: #666666;
+  /*! overflow:  auto; */
+  /*! height:  20px; */
+  /*! width: 25%; */
+  width:  35%;
+}
+
+#documentation td.exemple pre {
+  margin:  0px;
+  /*! max-height: 50px; */
+  /*! overflow: auto; */
+}
+
+#documentation td.format {
+  color: #666666;
+  /*! width: 25%; */
+}
+
+#documentation tbody.compact tr.showmetadata td {
+  border: none;
+  font-size: 90%;
+  font-weight: normal;
+  color: #aaa;
+  background-color:#fdfdfd;
+  cursor: pointer;
+
+}
+
+#documentation tbody.expanded tr.showmetadata td {
+  border: none;
+}
+
+
+#documentation tbody.compact tr.metadata {
+  display: none;
+}
+
+#documentation tbody.expanded tr.metadata {
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* Credits */
+
+#credits {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  height: 3%;
+}
+
+#credits #version {
+  height: 60%;
+  margin-bottom: 6px;
+}
+
+#credits #creditsbam {
+  height: 60%;
+  margin-bottom: 6px;
+}
+
+#credits #creditscc {
+  height: 80%;
+  margin: 5px;
+}
+
+#credits #creditsfing {
+  height: 100%;
+}
+
+#credits #csv {
+  height: 100%;
+  margin-left: 20px;
+}
+
+
+#credits #print {
+  height: 80%;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* Responsive */
+
+@media (max-width: 992px) {
+  .expanded .details {
+    display: block;
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+

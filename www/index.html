@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!--meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"-->
+    <title>Données Pilote MesInfos</title>
+    <script src="scripts/vendors/jquery-1.9.1.js"></script>
+    <script src="scripts/vendors/jquery.textfill.min.js"></script>
+    <script src="scripts/vendors/prototype-ld.js"></script>
+
+    <script src="scripts/vendors/moment.min.js"></script>
+    <script src="scripts/vendors/moment.locale.fr.js"></script>
+
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href="http://fonts.googleapis.com/css?family=Grand+Hotel" rel="stylesheet" type="text/css">
+    <link href="styles/main.css" rel="stylesheet" type="text/css" />
+
+    <script src="scripts/templates/typology.js"></script>
+    <script src="scripts/templates/doctype.js"></script>
+    <script src="scripts/templates/ideationcard.js"></script>
+  </head>
+  <body>
+    <h1>Les données du pilote MesInfos</h1>
+    <div id="preamble">
+      <img id='typologiesimg' src='img/typologies.png' >
+      <p></p>
+      <!--select id='period_filter'>
+        <option value="2016-11">dès l'automne 2016</option>
+        <option value="2017-01">pour 2017</option>
+        <option value="2020">dans le viseur</option>
+      </select-->
+      <label for='word_filter'>Filtrer par mot clé</label>
+      <input title="Filtrer les données" type='text' id='word_filter'><span id='word_filter_submit' >Q</span>
+
+      <p>
+        les données :
+        <label><input name="dataorigin" value="meisnfospartners" type="radio">des partenaires du pilote MesInfos</label>
+        <label><input name="dataorigin" value="cozycloud" type="radio">ré-utilisables dans Cozy</label>
+      </p>
+
+    </div>
+
+
+    <div id="container" >
+      <div id="documentation"></div>
+
+    <div id='credits'>
+        <span id='version'>2.0.0</span>
+        <img id='creditscc' src='img/credits_creativecommons.png' />
+        <img id='creditsfing' src='img/credits_fing.png' />
+        <!--a href='assets/tableau_data.csv' title='Tableau de toutes les données, format csv (Excel)' ><img id='csv' src='img/spreadsheet.png' /></a>
+        <!-- Noun project :
+          img/feedback.svg : Created by dilayorganci from the Noun Project
+          img/spreadsheet.png : Created by Pham Thi Dieu Linh from the Noun Project
+        -->
+      </div>
+
+      <script src="scripts/main.js"></script>
+  </body>
+</html>

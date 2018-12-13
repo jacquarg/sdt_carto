@@ -1,0 +1,29 @@
+mixin row(d, cls)
+  tr.subject(class=cls, id=d.id)
+    td.nom= d.propName
+    td.description= d.description
+    td.exemple= d.exampleValue
+
+li.compact.subject.active(id=id)
+  .toggle
+    include ideationcard.pug
+
+  .details
+    table.data
+      thead
+        tr
+          th Donnée
+          th Description
+          th Exemple
+      tbody.compact
+        each d in mainProperties
+          if (d)
+            +row(d)
+        tr.showmetadata.toggle
+          td Metadata
+          td ◢
+          td &nbsp;
+
+        each d in secondaryProperties
+          if (d)
+            +row(d, 'metadata')
