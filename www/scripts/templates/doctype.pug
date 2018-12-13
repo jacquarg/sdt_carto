@@ -7,23 +7,3 @@ mixin row(d, cls)
 li.compact.subject.active(id=id)
   .toggle
     include ideationcard.pug
-
-  .details
-    table.data
-      thead
-        tr
-          th Donnée
-          th Description
-          th Exemple
-      tbody.compact
-        each d in mainProperties
-          if (d)
-            +row(d)
-        tr.showmetadata.toggle
-          td Metadata
-          td ◢
-          td &nbsp;
-
-        each d in secondaryProperties
-          if (d)
-            +row(d, 'metadata')

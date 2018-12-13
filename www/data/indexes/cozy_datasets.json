@@ -1,0 +1,25 @@
+{
+  "@context": "semantic/context.json",
+  "@id": "q:Q534",
+  "@type": "schema:ItemList",
+  "label": "CozyData",
+  "description": "Les données personnelles ré-utilisables dans Cozy",
+  "schema:itemListElement": [
+    "q:Q155", "q:Q231", "q:Q179", "q:Q265", "q:Q295", "q:Q226",
+
+    "q:Q310", "q:Q377", "q:Q370", "q:Q330", "q:Q435",
+    "q:Q100","q:Q144", "q:Q142", "q:Q138",
+
+    "q:Q492", "q:Q445", "q:Q436",
+
+    "q:Q587", "q:Q621", "q:Q641",    
+
+    "q:Q523", "q:Q542", "q:Q585",
+
+    "https://raw.githubusesrcontent.com/jacquarg/cozy-konnector-enedis/master/Q108", "https://raw.githubusesrcontent.com/jacquarg/cozy-konnector-enedis/master/Q121",
+    "https://raw.githubusesrcontent.com/jacquarg/cozy-konnector-enedis/master/Q122",
+    "https://raw.githubusesrcontent.com/jacquarg/cozy-konnector-enedis/master/Q142",
+    "https://raw.githubusesrcontent.com/jacquarg/cozy-konnector-enedis/master/Q148",
+    "https://raw.githubusesrcontent.com/jacquarg/cozy-konnector-enedis/master/Q160"
+  ]
+}

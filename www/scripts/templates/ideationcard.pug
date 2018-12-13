@@ -1,18 +1,8 @@
 .ideationcard
-  .typology(style="background-color: rgb(" + typologyColor.r + "," + typologyColor.g + "," + typologyColor.b + ");")= typology
+  .typology(style="background-color: rgb(" + typologyColor.r + "," + typologyColor.g + "," + typologyColor.b + ");")= thematique
   .name
     span= label
-
-  if sourceDataController
-    img.holder(src="img/creationcard/logo_" + sourceDataController.toLowerCase() + ".png", title=spirceDataController)
+    
   .description= description
   .frequency
-    img(src='img/creationcard/frequency_gauge.svg')
-    span= updateFrequency
-
-  if index
-    .index= index
-
-  if availability =='soon'
-    .soon
-      div disponible prochainement
+    span= sourceDataController

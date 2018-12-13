@@ -56,8 +56,8 @@ class MetaObject {
   serializeData() {
     const data = $.extend({}, this)
     data.id = data['@id']
-    data.typologyColor = typologiesColors[data.typology] || {r: 0xFF, g: 0xFF, b: 0xFF},
-    data.updateFrequency = moment.duration(data.updateFrequency).humanize()
+    data.typologyColor = typologiesColors[data.typology] || {r: 0x99, g: 0x99, b: 0x99}
+    //data.updateFrequency = moment.duration(data.updateFrequency).humanize()
     const flatPropTree = (item, prefix = '') => {
       return item.allProperties
       .map(prop => PLD.getItem(prop, M.items)).reduce((res, prop) => {
@@ -81,10 +81,10 @@ class MetaObject {
       }, [])
     }
 
-    let props = flatPropTree(this)
+  //  let props = flatPropTree(this)
 
-    data.mainProperties = props.filter(prop => prop.kind !== 'Metadata')
-    data.secondaryProperties = props.filter(prop => prop.kind === 'Metadata')
+    // data.mainProperties = props.filter(prop => prop.kind !== 'Metadata')
+    // data.secondaryProperties = props.filter(prop => prop.kind === 'Metadata')
 
     return data
   }
@@ -107,10 +107,12 @@ const M = {}
 
 M.prepare = () => {
   return Promise.all([
-    $.getJSON('http://mesinfos.fing.org/cartographies/wikiapi/items.json'),
+    //$.getJSON('http://mesinfos.fing.org/cartographies/wikiapi/items.json'),
+    $.getJSON('data/items.json'),
+    $.getJSON('data/indexes/sdt_datasets.json'),
     // $.getJSON('http://localhost:8081/items.json'),
-    $.getJSON('http://mesinfos.fing.org/cartographies/wikiapi/indexes/mesinfos_datasets.json'),
-    $.getJSON('http://mesinfos.fing.org/cartographies/wikiapi/indexes/cozy_datasets.json'),
+    //$.getJSON('http://mesinfos.fing.org/cartographies/wikiapi/indexes/mesinfos_datasets.json'),
+    //$.getJSON('http://mesinfos.fing.org/cartographies/wikiapi/indexes/cozy_datasets.json'),
   ])
   .then((res) => {
     PLD.allItems = res[0]
@@ -121,13 +123,15 @@ M.prepare = () => {
       PLD.allItems[listItem['@id']] = listItem
     }
     addList(res[1])
-    addList(res[2])
+    //addList(res[2])
 
 
     PLD.mapClassOnType['q:Q102'] = MetaObject
+
+    PLD.mapClassOnType["wq:Q1397073"] = MetaObject
     PLD.mapClassOnType['object'] = MetaObject
 
-    M.datasets = PLD.listInstanceOf('q:Q102')
+    M.datasets = PLD.listInstanceOf("wq:Q1397073")
     M.updateFilter()
   })
 }
@@ -140,16 +144,22 @@ M.attachEvents = () => {
   })
 
   $('#word_filter').on('input', M.updateFilter)
-  $('input:radio').change(M.updateFilter)
+  $('input:radio').change(M.render)
 }
 
 M.render = () => {
+  $('#documentation').empty()
+  let sorter = $('input:radio:checked').val()
+  sorter = sorter || 'typology'
   const byTypology = U.groupBy(
-    M.datasets.map((id) => PLD.getItem(id)).sort((a, b) => a.label < b.label ? -1 : 1 ), 'typology')
+    M.datasets.map((id) => PLD.getItem(id)).sort((a, b) => a.label < b.label ? -1 : 1 ), sorter)
 
   let index = 0
   byTypology['zAutre'] = byTypology[undefined]
   delete byTypology[undefined]
+
+  byTypology['zAutre2'] = byTypology[""]
+  delete byTypology[""]
 
   Object.keys(byTypology).sort().forEach((typology) => {
     const typologyElem = $(typologyTemplate({ typology }))
@@ -166,7 +176,8 @@ M.render = () => {
 
 M.updateFilter = () => {
   let q = $('#word_filter').val()
-  let listItem = $('input:radio:checked').val() == 'cozycloud' ? 'q:Q524' : 'q:Q143'
+
+  let listItem = 'q:Q650'//$('input:radio:checked').val() == 'cozycloud' ? 'q:Q524' : 'q:Q143'
 
   let highlights = PLD.getItem(listItem)['schema:itemListElement']
   if (q) {
@@ -179,7 +190,6 @@ M.updateFilter = () => {
     , highlights)
   }
 
-  console.log(highlights)
   $('.subject').toggleClass('active', false)
   highlights.forEach((id) =>  $(`[id='${id}']`).toggleClass('active', true))
 }
