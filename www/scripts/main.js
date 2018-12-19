@@ -18,33 +18,19 @@ U.groupBy = (list, key) => {
 
 const typologiesColors = {
   // label:
-  "Déplacement":
+  "TEE":
   //   color:
-    {r: 0x3F, g: 0xA8, b: 0x7B},
+    {r: 80, g: 141, b: 129},
 
   // label:
-  "Domicile" :
+  "Transports" :
    // color:
-  {r: 0xB7, g: 0xDB, b: 0x6C},
+  {r: 78, g: 54, b: 188},
   //
   // label:
-  "Finance":
+  "Ados":
   // color:
-  {r: 0x75, g: 0xCB, b: 0x82},
-  //
-  // label:
-  "Communication":
-  // color:
-  {r: 0x9B, g: 0xDB, b: 0x6C},
-  //
-  // label:
-  "Profil":
-  // color:
-  {r: 0x59, g: 0xB3, b: 0x60},
-  //
-  // label:
-  "Loisir":  // color:
-  {r: 0x2C, g: 0x85, b: 0x6D},
+  {r: 74, g: 56, b: 199},
 }
 
 // prototype for metaobject deserialized from json-ld read-only data.
@@ -56,7 +42,7 @@ class MetaObject {
   serializeData() {
     const data = $.extend({}, this)
     data.id = data['@id']
-    data.typologyColor = typologiesColors[data.typology] || {r: 0x99, g: 0x99, b: 0x99}
+    data.typologyColor = typologiesColors[data.thematique] || {r: 0x99, g: 0x99, b: 0x99}
     //data.updateFrequency = moment.duration(data.updateFrequency).humanize()
     const flatPropTree = (item, prefix = '') => {
       return item.allProperties
@@ -148,30 +134,68 @@ M.attachEvents = () => {
 }
 
 M.render = () => {
+  console.log("1")
   $('#documentation').empty()
-  let sorter = $('input:radio:checked').val()
-  sorter = sorter || 'typology'
-  const byTypology = U.groupBy(
-    M.datasets.map((id) => PLD.getItem(id)).sort((a, b) => a.label < b.label ? -1 : 1 ), sorter)
+  const byThematique = U.groupBy(M.datasets.map((id) => PLD.getItem(id)), "thematique")
 
-  let index = 0
-  byTypology['zAutre'] = byTypology[undefined]
-  delete byTypology[undefined]
+  let autres = []
+  autres = autres.concat(byThematique[undefined] || [])
+  delete byThematique[undefined]
+  autres = autres.concat(byThematique[""] || [])
+  delete byThematique[""]
+  byThematique["zAutre"] = autres
 
-  byTypology['zAutre2'] = byTypology[""]
-  delete byTypology[""]
+  console.log("2")
+  console.log(byThematique)
+  Object.keys(byThematique).sort().forEach((thematique) => {
 
-  Object.keys(byTypology).sort().forEach((typology) => {
-    const typologyElem = $(typologyTemplate({ typology }))
-    $('#documentation').append(typologyElem)
+    const thematiqueElem = $(thematiqueTemplate({ thematique }))
+    $('#documentation').append(thematiqueElem)
+    console.log("3")
 
-    byTypology[typology].forEach((dataset) => {
-      const data = dataset.serializeData()
-      typologyElem.find('ul').append(doctypeTemplate(data))
+    const byDefi = U.groupBy(byThematique[thematique].sort((a, b) => a.label < b.label ? -1 : 1 ), "defi")
+    Object.keys(byDefi).sort().forEach((defi) => {
+      const defiElem = $(defiTemplate({ defi }))
+      thematiqueElem.find('ul.defis').append(defiElem)
+      console.log("4")
+
+      byDefi[defi].forEach((dataset) => {
+        const data = dataset.serializeData()
+        defiElem.find('ul.datasets').append(ideationcardTemplate(data))
+        console.log("5")
+
+      })
     })
+
   })
   M.attachEvents()
   $('.name').textfill({ maxFontPixels: 30, });
+
+  //
+  //
+  // let sorter = $('input:radio:checked').val()
+  // sorter = sorter || 'typology'
+  // const byTypology = U.groupBy(
+  //   M.datasets.map((id) => PLD.getItem(id)).sort((a, b) => a.label < b.label ? -1 : 1 ), sorter)
+  //
+  // let index = 0
+  // byTypology['zAutre'] = byTypology[undefined]
+  // delete byTypology[undefined]
+  //
+  // byTypology['zAutre2'] = byTypology[""]
+  // delete byTypology[""]
+  //
+  // Object.keys(byTypology).sort().forEach((typology) => {
+  //   const typologyElem = $(typologyTemplate({ typology }))
+  //   $('#documentation').append(typologyElem)
+  //
+  //   byTypology[typology].forEach((dataset) => {
+  //     const data = dataset.serializeData()
+  //     typologyElem.find('ul').append(doctypeTemplate(data))
+  //   })
+  // })
+  // M.attachEvents()
+  // $('.name').textfill({ maxFontPixels: 30, });
 }
 
 M.updateFilter = () => {
