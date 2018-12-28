@@ -234,6 +234,48 @@ M.treeHighlight = (q, items) => {
   return highlight
 }
 
+M.initForm = () => {
+  const formValues = {
+    natures: [
+      "personnelle", "open data", "référentiels", "statistiques"
+    ],
+    thematiques: [
+      "TEE", "Mobilité", "Ados"
+    ]
+  }
+  const formElem = $(adddatasetTemplate(formValues))
+
+  $('#preamble').append(formElem)
+
+  $('form#adddataset').onsubmit = (e) => {
+    e.preventDefault()
+// generate UUID in browser : https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
+    "q:Q758":
+     const dataset = {
+      "@id": "q:Q758",
+      "@type": [
+        "object",
+        "wq:Q1397073"
+      ],
+      "description": $('#inputdescription').val(),
+      "label": $('#inputname').val(),
+      "access": "",
+      "accessMediator": "",
+      "defi": "",
+      //"defi": $('#inputdefi').val(),,
+      "information": "",
+      "kind": "",
+      "portable": "",
+      "sourceDataController": $('#inputsourcedatacontroller').val(),
+      "thematique": $('#inputthematique').val(),
+      "typology": ""
+    },
+
+
+  }
+
+}
+
 
 M.prepare()
 .then(M.render)
