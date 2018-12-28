@@ -1,20 +1,22 @@
-form.ideationcard#adddataset
+form.ideationcard#adddataset(method="post", name="theform", action="")
   select.typology#inputthematique
-    each val t in thematiques
+    each t in thematiques
       option= t
 
-  input.name#inputname(type="text", placeholder="i
-Inscrivez ici le nom de la donnée")
+  input.name#inputname(type="text", placeholder="Inscrivez ici le nom de la donnée")
   input.description#inputdescription(type="text", placeholder="Précisez ici")
 
   input#inputsourcedatacontroller(type="text", placeholder="Détenteur")
   input#inputsupport(type="text", placeholder="support")
 
   select#inputnature
-    each val t in natures
+    each t in natures
       option= t
 
   input#inputcomment(type="text", placehoolder="support")
+  input(type="submit", name="submit", class="button", id="submit_btn", value="Send")
+
+  //-button(type="submit")= Envoyer
 
 //-    Nature  : personnelle, open data, référentiels, statistiques
 //-    Information (qu'est-ce qu'on cherche)

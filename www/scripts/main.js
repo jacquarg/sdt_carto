@@ -96,12 +96,15 @@ M.prepare = () => {
     //$.getJSON('http://mesinfos.fing.org/cartographies/wikiapi/items.json'),
     $.getJSON('data/items.json'),
     $.getJSON('data/indexes/sdt_datasets.json'),
+    $.getJSON('data/contrib_items.json'),
     // $.getJSON('http://localhost:8081/items.json'),
     //$.getJSON('http://mesinfos.fing.org/cartographies/wikiapi/indexes/mesinfos_datasets.json'),
     //$.getJSON('http://mesinfos.fing.org/cartographies/wikiapi/indexes/cozy_datasets.json'),
   ])
   .then((res) => {
     PLD.allItems = res[0]
+    $.extend(PLD.allItems, res[2])
+
 
     const addList = (listItem) => {
       // listItem['schema:itemListElement'] = listItem['schema:itemListElement']
@@ -247,32 +250,48 @@ M.initForm = () => {
 
   $('#preamble').append(formElem)
 
-  $('form#adddataset').onsubmit = (e) => {
+  $('form#adddataset').submit((e) => {
     e.preventDefault()
+// $('#submit_btn').click = () => {
+    const id = "q:Q" + uuidv4()
 // generate UUID in browser : https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
-    "q:Q758":
      const dataset = {
-      "@id": "q:Q758",
-      "@type": [
-        "object",
-        "wq:Q1397073"
-      ],
-      "description": $('#inputdescription').val(),
-      "label": $('#inputname').val(),
-      "access": "",
-      "accessMediator": "",
-      "defi": "",
-      //"defi": $('#inputdefi').val(),,
-      "information": "",
-      "kind": "",
-      "portable": "",
-      "sourceDataController": $('#inputsourcedatacontroller').val(),
-      "thematique": $('#inputthematique').val(),
-      "typology": ""
-    },
+        "@id": id,
+        "@type": [
+          "object",
+          "wq:Q1397073"
+        ],
+        "description": $('#inputdescription').val(),
+        "label": $('#inputname').val(),
+        "access": "",
+        "accessMediator": "",
+        "defi": "",
+        //"defi": $('#inputdefi').val(),,
+        "information": "",
+        "kind": "",
+        "portable": "",
+        "sourceDataController": $('#inputsourcedatacontroller').val(),
+        "thematique": $('#inputthematique').val(),
+        "typology": ""
+      }
 
-
-  }
+      $.ajax({
+        type: "POST",
+        url: "./php/add_dataset.php",
+        data: JSON.stringify(dataset),
+        success: (err) => {
+          console.log("success body")
+          // PLD.allItems[id] = dataset
+          console.log(err)
+        },
+        contentType: "application/json",
+        dataType: 'json'
+      })
+      // post the dataset !?
+      // function php, qui sauvegarde dans un fichier stand alone,
+      // puis qui concat à un fichier json unique ?
+      // append to ...
+  })
 
 }
 
@@ -280,3 +299,14 @@ M.initForm = () => {
 M.prepare()
 .then(M.render)
 .then(M.updateFilter)
+.then(M.initForm)
+
+
+// TO move in lib.
+function uuidv4() {
+  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+  )
+}
+
+console.log(uuidv4());
