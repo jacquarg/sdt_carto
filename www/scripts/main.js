@@ -121,26 +121,62 @@ M.prepare = () => {
     PLD.mapClassOnType['object'] = MetaObject
 
     M.datasets = PLD.listInstanceOf("wq:Q1397073")
-    M.updateFilter()
   })
 }
 
 M.attachEvents = () => {
-  $('.toggle').click((ev) => {
-    $(ev.currentTarget.parentElement)
-    .toggleClass('compact')
-    .toggleClass('expanded')
-  })
+  $('#word_filter').on('input', M.updateView)
+  $('input:checkbox').change(M.updateView)
+}
 
-  $('#word_filter').on('input', M.updateFilter)
-  $('input:radio').change(M.render)
+M.updateView = () => {
+  if (M.isUpdating) {
+    M.shouldRefresh = true
+  } else {
+    M.isUpdating = true
+    M.shouldRefresh = false
+    M.prepareRender()
+    M.render()
+    M.isUpdating = false
+    if (M.shouldRefresh) {
+      M.updateView()
+    }
+  }
+
+}
+
+M.prepareRender = () => {
+  M.toDisplayDatasets = M.datasets.slice()
+  console.log(M.toDisplayDatasets)
+
+  // Filter by keyword 
+  console.log('toto')
+  let q = $('#word_filter').val()
+  if (q) {
+    q = q.toLowerCase()
+    M.toDisplayDatasets = M.toDisplayDatasets.filter((it) => {
+      return it.description && it.description.toLowerCase().indexOf(q) != -1 ||
+        it.label && it.label.toLowerCase().indexOf(q) != -1
+    })
+  }
+
+  // Filter by thematique
+  if ($('input:checked').length > 0) {
+    const checked = {
+      "TEE": $('input[value="tee"]').is(':checked'),
+      "Ados": $('input[value="ados"]').is(':checked'),
+      "Mobilité": $('input[value="mobilite"]').is(':checked'),
+    }
+    M.toDisplayDatasets = M.toDisplayDatasets.filter((it) => {
+      return checked[it.thematique] == true
+    })
+  }
 }
 
 M.render = () => {
   console.log("1")
   $('#documentation').empty()
-  const byThematique = U.groupBy(M.datasets.map((id) => PLD.getItem(id)), "thematique")
-
+  const byThematique = U.groupBy(M.toDisplayDatasets.map((id) => PLD.getItem(id)), "thematique")
   let autres = []
   autres = autres.concat(byThematique[undefined] || [])
   delete byThematique[undefined]
@@ -151,7 +187,6 @@ M.render = () => {
   console.log("2")
   console.log(byThematique)
   Object.keys(byThematique).sort().forEach((thematique) => {
-
     const thematiqueElem = $(thematiqueTemplate({ thematique }))
     $('#documentation').append(thematiqueElem)
     console.log("3")
@@ -171,7 +206,6 @@ M.render = () => {
     })
 
   })
-  M.attachEvents()
   $('.name').textfill({ maxFontPixels: 30, });
 
   //
@@ -201,25 +235,42 @@ M.render = () => {
   // $('.name').textfill({ maxFontPixels: 30, });
 }
 
-M.updateFilter = () => {
-  let q = $('#word_filter').val()
+// M.updateFilter = () => {
+//   console.log('toto')
+//   let q = $('#word_filter').val()
 
-  let listItem = 'q:Q650'//$('input:radio:checked').val() == 'cozycloud' ? 'q:Q524' : 'q:Q143'
+//   let listItem = 'q:Q650'//$('input:radio:checked').val() == 'cozycloud' ? 'q:Q524' : 'q:Q143'
 
-  let highlights = PLD.getItem(listItem)['schema:itemListElement']
-  if (q) {
-    q = q.toLowerCase()
-    highlights = M.treeHighlight((item) => Object.values(item).some((value) => PLD.testOnObject(value,
-      (v) => {
-        if (typeof v !== "string") return false
-        return v.toLowerCase().indexOf(q) !== -1
-      }))
-    , highlights)
-  }
+//   let highlights = PLD.getItem(listItem)['schema:itemListElement']
 
-  $('.subject').toggleClass('active', false)
-  highlights.forEach((id) =>  $(`[id='${id}']`).toggleClass('active', true))
-}
+//   if (q) {
+//     q = q.toLowerCase()
+//     highlights = M.treeHighlight((item) => Object.values(item).some((value) => PLD.testOnObject(value,
+//       (v) => {
+//         if (typeof v !== "string") return false
+//         return v.toLowerCase().indexOf(q) !== -1
+//       }))
+//     , highlights)
+//   }
+
+//   if ($('input:checked').length > 0) {
+//     const checked = {
+//       "TEE": $('input[value="tee"]').is(':checked'),
+//       "Ados": $('input[value="ados"]').is(':checked'),
+//       "Mobilité": $('input[value="mobilite"]').is(':checked'),
+//     }
+//     highlights = highlights.filter((id) => {
+//       console.log(id)
+//       let item = PLD.allItems[id]
+
+//       return item != null && checked[item.thematique] == true
+//     })
+//   }
+
+
+//   $('.subject').toggleClass('active', false)
+//   highlights.forEach((id) =>  $(`[id='${id}']`).toggleClass('active', true))
+// }
 
 
 // Return a set of item ids to highlight
@@ -297,9 +348,11 @@ M.initForm = () => {
 
 
 M.prepare()
+.then(M.prepareRender)
 .then(M.render)
-.then(M.updateFilter)
+// .then(M.updateFilter)
 .then(M.initForm)
+.then(M.attachEvents)
 
 
 // TO move in lib.
