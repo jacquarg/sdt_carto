@@ -92,6 +92,17 @@ class MetaObject {
 const M = {}
 
 M.prepare = () => {
+  // Prepare filters
+  M.filters = {
+    thematique: {
+      tee: true,
+      ados: true,
+      mobilite: true
+    },
+    q: null,
+  }
+
+
   return Promise.all([
     //$.getJSON('http://mesinfos.fing.org/cartographies/wikiapi/items.json'),
     $.getJSON('data/items.json'),
@@ -125,8 +136,16 @@ M.prepare = () => {
 }
 
 M.attachEvents = () => {
-  $('#word_filter').on('input', M.updateView)
-  $('input:checkbox').change(M.updateView)
+  $('.word_filter').on('input', (e) => {
+    console.log(e)
+    M.filters.q = $(e.target).val()
+    M.updateView()
+  })
+  $('input:checkbox').change((e) => {
+    e.preventDefault()
+    M.filters.thematique[e.target.value] = !M.filters.thematique[e.target.value]
+    M.updateView()
+  })
 }
 
 M.updateView = () => {
@@ -137,7 +156,7 @@ M.updateView = () => {
     M.shouldRefresh = false
     M.prepareRender()
     M.render()
-    Mi.sUpdating = false
+    M.isUpdating = false
     if (M.shouldRefresh) {
       M.updateView()
     }
@@ -151,7 +170,7 @@ M.prepareRender = () => {
 
   // Filter by keyword 
   console.log('toto')
-  let q = $('#word_filter').val()
+  let q = M.filters.q
   if (q) {
     q = q.toLowerCase()
     M.toDisplayDatasets = M.toDisplayDatasets.filter((it) => {
@@ -163,9 +182,9 @@ M.prepareRender = () => {
   // Filter by thematique
   if ($('input:checked').length > 0) {
     const checked = {
-      "TEE": $('input[value="tee"]').is(':checked'),
-      "Ados": $('input[value="ados"]').is(':checked'),
-      "Mobilité": $('input[value="mobilite"]').is(':checked'),
+      "TEE": M.filters.thematique['tee'],
+      "Ados": M.filters.thematique['ados'],
+      "Mobilité": M.filters.thematique['mobilite'],
     }
     M.toDisplayDatasets = M.toDisplayDatasets.filter((it) => {
       return checked[it.thematique] == true
@@ -174,6 +193,14 @@ M.prepareRender = () => {
 }
 
 M.render = () => {
+  // render filters
+  
+  Object.entries(M.filters.thematique).forEach((it) =>
+      $('input[value="' + it[0] + '"]').prop('checked', it[1]))
+
+  $('.word_filter').val(M.filters.q)
+
+  // render list
   console.log("1")
   $('#documentation').empty()
   const byThematique = U.groupBy(M.toDisplayDatasets.map((id) => PLD.getItem(id)), "thematique")
