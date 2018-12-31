@@ -66,20 +66,31 @@ h3 {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 /* Header */
-
-#expanded_header h3 {
-    transform: rotate(270deg);
-    transform-origin: right bottom 0;
-    position: absolute;
-    top: -60px;
-    right: 20px;
-    font-size: 54px;
+#expanded_header {
+  z-index: 200;
+  position: absolute;
+  width: 100%;
+  top: 0px;
 }
 
 #expanded_header img {
-  width: calc(100% - 200px);
-  z-index: 0;
-  margin-right: 200px;
+  width: 100%;
+}
+
+.toolbar {
+  background: url('../img/filters_bg.jpg');
+  height: 72px;
+  line-height: 72px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+
+}
+
+#collapsed_header {
+  position: fixed;
+  z-index: 100;
+  top: 0px;
+  width: 100%;
 }
 
 #collapsed_logo {
@@ -108,26 +119,26 @@ h3 {
   bottom: 5px;
 }
 
-#collapsed_header h3 {
+#collapsed_logo h3 {
   display: inline-block;
-
   margin: 0 16px;
-
   position: relative;
-
   bottom: 30px;
+  background: #FFF;
 }
 
-#filters {
+.filters {
   display: inline-block;
+  margin: 0;
+  vertical-align: top;
 }
 
-#filters li {
+.filters li {
   display: inline-block;
 }
 
 .thematique_filter {
-  color: #000;
+  color: #FFF;
   font-family: 'Rubik', sans-serif;
   font-weight: 900;
   font-size: 24px;

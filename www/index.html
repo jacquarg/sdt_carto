@@ -25,17 +25,32 @@
   <body>
     <header>
       <div id="expanded_header">
-        <img id="banner" src='img/banner.jpg'>
-        <h3>les données</h3>  
-      </div>
+        <img id="banner" src='img/sdt_data_banner.jpg'>
       
-      <div id="collapsed_header">
+        <div class="toolbar">
+          <div style="display: inline-block; height: 72px; width: 637px; position: relative">  </div>
+          <ul class="filters">
+            <li>
+              <!-- TODO: cercle avec couleur territoire, coloré activé, gris desactivé (?) https://bryanhadaway.com/how-to-create-circles-with-css/-->
+              <label class="thematique_filter"><input name="thematique" value="tee" type="checkbox">TEE</label>
+              <label class="thematique_filter"><input name="thematique" value="ados" type="checkbox">Ados</label>
+              <label class="thematique_filter"><input name="thematique" value="mobilite" type="checkbox">Mobilité</label>
+            </li>
+            <li>
+              <!-- <label for='word_filter'>Filtrer par mot clé</label> -->
+              <input title="Filtrer les données" type='text' id='word_filter' placeholder="Filtrer par mot-clé"><span id='word_filter_submit' >Q</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="collapsed_header" class="toolbar">
         <div id="collapsed_logo">
           <img src="img/logo_mesinfos_lb2.png" />
           <h1>SELF DATA TERRITORIAL</h1>
+          <h3>les données</h3>
         </div>
-        <h3>les données</h3>
-        <ul id="filters">
+        <ul class="filters">
           <li>
             <!-- TODO: cercle avec couleur territoire, coloré activé, gris desactivé (?) https://bryanhadaway.com/how-to-create-circles-with-css/-->
             <label class="thematique_filter"><input name="thematique" value="tee" type="checkbox">TEE</label>
