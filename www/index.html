@@ -12,7 +12,9 @@
     <script src="scripts/vendors/moment.locale.fr.js"></script>
 
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    <link href="http://fonts.googleapis.com/css?family=Grand+Hotel" rel="stylesheet" type="text/css">
+    <!-- TODO : remove gfonts ! -->
+    <link href="https://fonts.googleapis.com/css?family=Arvo:400,700,700i|Rubik:300,400,900" rel="stylesheet">
+
     <link href="styles/main.css" rel="stylesheet" type="text/css" />
 
     <script src="scripts/templates/thematique.js"></script>
@@ -21,26 +23,32 @@
     <script src="scripts/templates/adddataset.js"></script>
   </head>
   <body>
-    <h1>Slef Data Territorial : les données</h1>
-    <div id="preamble">
-      <img id='typologiesimg' src='img/typologies.png' >
-      <p></p>
-      <!--select id='period_filter'>
-        <option value="2016-11">dès l'automne 2016</option>
-        <option value="2017-01">pour 2017</option>
-        <option value="2020">dans le viseur</option>
-      </select-->
-      <label for='word_filter'>Filtrer par mot clé</label>
-      <input title="Filtrer les données" type='text' id='word_filter'><span id='word_filter_submit' >Q</span>
-
-      <p>
-        _ _ _ _ :
-        <label><input name="thematique" value="tee" type="checkbox">TEE</label>
-        <label><input name="thematique" value="ados" type="checkbox">Ados</label>
-        <label><input name="thematique" value="mobilite" type="checkbox">Mobilité</label>
-      </p>
-    </div>
-
+    <header>
+      <div id="expanded_header">
+        <img id="banner" src='img/banner.jpg'>
+        <h3>les données</h3>  
+      </div>
+      
+      <div id="collapsed_header">
+        <div id="collapsed_logo">
+          <img src="img/logo_mesinfos_lb2.png" />
+          <h1>SELF DATA TERRITORIAL</h1>
+        </div>
+        <h3>les données</h3>
+        <ul id="filters">
+          <li>
+            <!-- TODO: cercle avec couleur territoire, coloré activé, gris desactivé (?) https://bryanhadaway.com/how-to-create-circles-with-css/-->
+            <label class="thematique_filter"><input name="thematique" value="tee" type="checkbox">TEE</label>
+            <label class="thematique_filter"><input name="thematique" value="ados" type="checkbox">Ados</label>
+            <label class="thematique_filter"><input name="thematique" value="mobilite" type="checkbox">Mobilité</label>
+          </li>
+          <li>
+            <!-- <label for='word_filter'>Filtrer par mot clé</label> -->
+            <input title="Filtrer les données" type='text' id='word_filter' placeholder="Filtrer par mot-clé"><span id='word_filter_submit' >Q</span>
+          </li>
+        </ul>
+      </div>
+    </header>
 
     <div id="container" >
       <div id="documentation"></div>

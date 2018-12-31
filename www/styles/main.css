@@ -25,32 +25,140 @@ a:hover, a:active {
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/* preamble */
-h1 {
-  color: #aaaaaa;
-  font-family: "Grand Hotel", cursive;
-  font-size: 40px;
-  line-height: 41.5px;
-  margin: 0;
-  text-align: center;
-  margin-top: 33px;
 
+
+
+/* charte */
+html {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 400;
+  color: #2E323D;
+}
+
+h1 {
+  color: #2E323D;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 900;
+  font-size: 40px;
+  text-align: center;
   margin-top: 50px;
   margin-bottom: 5px;
 }
 
-#preamble {
-  margin: 40px 20px;
+h2 {
+  color: #2E323D;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 900;
+  font-size: 36px;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 5px; 
 }
 
-#preamble img {
-  max-height: 200px;
-  float: left;
-  margin: 20px;
+h3 {
+  color: #2E323D;
+  font-family: 'Arvo', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 36px;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+/* Header */
+
+#expanded_header h3 {
+    transform: rotate(270deg);
+    transform-origin: right bottom 0;
+    position: absolute;
+    top: -60px;
+    right: 20px;
+    font-size: 54px;
+}
+
+#expanded_header img {
+  width: calc(100% - 200px);
+  z-index: 0;
+  margin-right: 200px;
+}
+
+#collapsed_logo {
+    background: #F7F8FD;
+    display: inline-block;
+    height: 72px;
+    padding: 4px;
+}
+
+#collapsed_logo img {
+  display: inline-block;
+  background: #F7F8FD;
+  height: 64px;
+}
+
+#collapsed_logo h1 {
+  width: 200px;
+  height: 64px;
+  font-size: 28px;
+  display: inline-block;
+  line-height: 27px;
+  text-align: left;
+  margin: 0 8px 0 0;
+
+  position: relative;
+  bottom: 5px;
+}
+
+#collapsed_header h3 {
+  display: inline-block;
+
+  margin: 0 16px;
+
+  position: relative;
+
+  bottom: 30px;
+}
+
+#filters {
+  display: inline-block;
+}
+
+#filters li {
+  display: inline-block;
+}
+
+.thematique_filter {
+  color: #000;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  padding: 8px;
+}
+
+/*label[for=word_filter] {
+  display: block;
+}
+*/
+#word_filter {
+  width: 200px;
+  
+  margin-left: 20px;
+
+  font-size: 18px;
+
+  background: #eee
+  ; 
+  border:  0;
+  border-radius: 2px;
+  padding: 5px;
+  z-index: 2000;
+}
+
+#word_filter_submit {
+  left: 173px;
+  top: 25px;
+  z-index: 2001;
+
+}
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* tools */
@@ -99,7 +207,7 @@ label[for=word_filter] {
   line-height: 41.5px;
 }
 
-#documentation .toggle {
+#documentation .ideationcard {
   cursor: pointer;
   display: inline-block;
 }

@@ -137,7 +137,7 @@ M.updateView = () => {
     M.shouldRefresh = false
     M.prepareRender()
     M.render()
-    M.isUpdating = false
+    Mi.sUpdating = false
     if (M.shouldRefresh) {
       M.updateView()
     }
