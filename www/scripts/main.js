@@ -43,6 +43,12 @@ class MetaObject {
     const data = $.extend({}, this)
     data.id = data['@id']
     data.typologyColor = typologiesColors[data.thematique] || {r: 0x99, g: 0x99, b: 0x99}
+    const natureMap = {
+      "Personnelle": "personal",
+      "Référentiel": "repository",
+      "Statistiques": "statistics",
+    }
+    data.natureImageUrl = "img/" + natureMap[data.nature] + ".png"
     //data.updateFrequency = moment.duration(data.updateFrequency).humanize()
     const flatPropTree = (item, prefix = '') => {
       return item.allProperties

@@ -9,6 +9,9 @@ html {
   color: #666;
 }
 
+body {
+  margin: 0px;
+}
 
 a {
   color: #0088cc;
@@ -60,21 +63,25 @@ h3 {
   font-family: 'Arvo', sans-serif;
   font-weight: 900;
   font-style: italic;
-  font-size: 36px;
+  font-size: 30px;
+  margin-top: 50px;
+  margin-bottom: 30px;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 /* Header */
 #expanded_header {
-  z-index: 200;
-  position: absolute;
-  width: 100%;
-  top: 0px;
+ /* z-index: 200;
+  position: relative;*/
+  /*width: 100%;*/
+  /*top: 0px;*/
 }
 
 #expanded_header img {
   width: 100%;
+   z-index: 200;
+  position: relative;
 }
 
 .toolbar {
@@ -123,8 +130,11 @@ h3 {
   display: inline-block;
   margin: 0 16px;
   position: relative;
+  font-size: 36px
   bottom: 30px;
-  background: #FFF;
+  /*background: #FFF;*/
+  vertical-align: top;
+  height: 64px;
 }
 
 .filters {
@@ -206,20 +216,21 @@ label[for=word_filter] {
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* datasets list. */
+
+#container {
+  margin-top: 100px;
+}
+
 #documentation > .typology {
   clear: both;
 }
 
 #documentation h3 {
-  text-align: center;
-  font-family: 'Grand Hotel', cursive;
-  font-size: 50px;
-  color: #aaaaaa;
-  line-height: 41.5px;
+  line-height: 30px;
 }
 
 #documentation .ideationcard {
-  cursor: pointer;
+  /*cursor: pointer;*/
   display: inline-block;
 }
 
@@ -236,15 +247,10 @@ li.subject {
 }
 
 
-.datasets li.active.compact {
+.datasets li {
   display: inline-block;
   padding: 20px;
-}
-
-.datasets li.active.expanded {
-  display: block;
-  width: 100%;
-  padding: 20px;
+  margin: 10px;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -265,7 +271,8 @@ li.subject {
 
 .ideationcard .typology {
   color: white;
-  font-family: "Grand Hotel", cursive;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 900;
   font-size: 30px;
   padding: 8px;
   position: absolute;
@@ -278,8 +285,8 @@ li.subject {
 .ideationcard .name {
   /*! margin: 20px 0 20px 0; */
   text-align: center;
-  font-family: 'Lato', Helvetica, Arial, sans-serif;
-  font-weight: 300;
+  font-family: 'Arvo', serif;
+  font-weight: 700;
   color: #555;
   height: 95px;
   width: 230px;
@@ -297,6 +304,7 @@ li.subject {
   line-height: 20px;
   position: absolute;
   top: 210px;
+  overflow-y: scroll;
 }
 
 .ideationcard .holder {
@@ -323,26 +331,6 @@ li.subject {
   padding-right: 4px;
 }
 
-
-.ideationcard .soon {
-  background: #999;
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top:0;
-  left: 0;
-  opacity: 0.6;
-  
-}
-.ideationcard .soon > div {
-  transform: rotate(45deg);
-  position: absolute;
-  left: 0%;
-  top: 200px;
-  font-size: 35px;
-  color: black;
-  text-align: center;
-}
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
