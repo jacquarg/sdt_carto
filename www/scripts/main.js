@@ -43,12 +43,14 @@ class MetaObject {
     const data = $.extend({}, this)
     data.id = data['@id']
     data.typologyColor = typologiesColors[data.thematique] || {r: 0x99, g: 0x99, b: 0x99}
-    const natureMap = {
-      "Personnelle": "personal",
-      "Référentiel": "repository",
-      "Statistiques": "statistics",
+    const nature2NatureImgUrl = (it) => {
+      if (it && it.toLowerCase().indexOf("personnelle") != -1) {
+        return "img/ideationcard/personal.png"
+      } else {
+        return "img/ideationcard/notpersonal.png"
+      }
     }
-    data.natureImageUrl = "img/" + natureMap[data.nature] + ".png"
+    data.kindImgUrl = nature2NatureImgUrl(data.kind)
     //data.updateFrequency = moment.duration(data.updateFrequency).humanize()
     const flatPropTree = (item, prefix = '') => {
       return item.allProperties
@@ -106,6 +108,8 @@ M.prepare = () => {
       mobilite: true
     },
     q: null,
+    personal: true,
+    notpersonal: true,
   }
 
 
@@ -152,6 +156,16 @@ M.attachEvents = () => {
     M.filters.thematique[e.target.value] = !M.filters.thematique[e.target.value]
     M.updateView()
   })
+  $('.personal_filter').click((e) => {
+    e.preventDefault()
+    M.filters.personal = !M.filters.personal
+    M.updateView()
+  })
+  $('.notpersonal_filter').click((e) => {
+    e.preventDefault()
+    M.filters.notpersonal = !M.filters.notpersonal
+    M.updateView()
+  })
 }
 
 M.updateView = () => {
@@ -174,7 +188,7 @@ M.prepareRender = () => {
   M.toDisplayDatasets = M.datasets.slice()
   console.log(M.toDisplayDatasets)
 
-  // Filter by keyword 
+  // Filter by keyword
   console.log('toto')
   let q = M.filters.q
   if (q) {
@@ -184,6 +198,13 @@ M.prepareRender = () => {
         it.label && it.label.toLowerCase().indexOf(q) != -1
     })
   }
+
+  // filter by kind
+  M.toDisplayDatasets = M.toDisplayDatasets.filter((it) => {
+      const personal = it.kind && it.kind.toLowerCase().indexOf("personnelle") != -1
+      return M.filters.personal && personal || M.filters.notpersonal && !personal
+  })
+
 
   // Filter by thematique
   if ($('input:checked').length > 0) {
@@ -200,11 +221,14 @@ M.prepareRender = () => {
 
 M.render = () => {
   // render filters
-  
+
   Object.entries(M.filters.thematique).forEach((it) =>
       $('input[value="' + it[0] + '"]').prop('checked', it[1]))
 
   $('.word_filter').val(M.filters.q)
+
+  $('.notpersonal_filter').toggleClass('active', M.filters.notpersonal)
+  $('.personal_filter').toggleClass('active', M.filters.personal)
 
   // render list
   console.log("1")

@@ -4,8 +4,11 @@ li.ideationcard
     span= label
 
   .description= description
-  .nature(title=nature)
-    img(url=natureImgUrl)
+  .kind(title=kind)
+    img(src=kindImgUrl)
 
-  .datacontroller(title=sourceDataController)
+  .datacontroller(title="Responsable de traitement")
     span= sourceDataController
+
+  .access(title="Accès aux données")
+    span= access
