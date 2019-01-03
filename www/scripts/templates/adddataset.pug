@@ -1,26 +1,28 @@
-form.ideationcard#adddataset(method="post", name="theform", action="")
-  select.typology#inputthematique
-    each t in thematiques
-      option= t
+.modal
+  .close X
+  form.ideationcard#adddataset(method="post", name="theform", action="")
+    select.typology#inputthematique
+      each t in thematiques
+        option= t
 
-  input.name#inputname(type="text", placeholder="Inscrivez ici le nom de la donnée")
-  input.description#inputdescription(type="text", placeholder="Précisez ici")
+    input.name#inputname(type="text", placeholder="Inscrivez ici le nom de la donnée")
+    input.description#inputdescription(type="text", placeholder="Précisez ici")
 
-  input#inputsourcedatacontroller(type="text", placeholder="Détenteur")
-  input#inputsupport(type="text", placeholder="support")
+    input#inputsourcedatacontroller(type="text", placeholder="Détenteur")
+    input#inputsupport(type="text", placeholder="support")
 
-  select#inputnature
-    each t in natures
-      option= t
+    select#inputnature
+      each t in natures
+        option= t
 
-  input#inputcomment(type="text", placehoolder="support")
-  input(type="submit", name="submit", class="button", id="submit_btn", value="Send")
+    input#inputcomment(type="text", placehoolder="support")
+    input(type="submit", name="submit", class="button", id="submit_btn", value="Send")
 
-  //-button(type="submit")= Envoyer
+    //-button(type="submit")= Envoyer
 
-//-    Nature  : personnelle, open data, référentiels, statistiques
-//-    Information (qu'est-ce qu'on cherche)
-//-    Catégorie (domicile, travail/ecole, finance, profil, loisirs, communication, déplacements, santé)
-//-    Accès
-//-    Portabilité
-//-    Commentaires
+  //-    Nature  : personnelle, open data, référentiels, statistiques
+  //-    Information (qu'est-ce qu'on cherche)
+  //-    Catégorie (domicile, travail/ecole, finance, profil, loisirs, communication, déplacements, santé)
+  //-    Accès
+  //-    Portabilité
+  //-    Commentaires

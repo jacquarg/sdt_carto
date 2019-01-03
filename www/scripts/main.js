@@ -184,6 +184,7 @@ M.attachEvents = () => {
     M.filters.notpersonal = !M.filters.notpersonal
     M.updateView()
   })
+  $('.add_data').click(M.initForm)
 }
 
 M.updateView = () => {
@@ -374,7 +375,8 @@ M.initForm = () => {
   }
   const formElem = $(adddatasetTemplate(formValues))
 
-  $('#preamble').append(formElem)
+  $('body').append(formElem)
+  formElem.find('.close').click((e) => { formElem.remove() })
 
   $('form#adddataset').submit((e) => {
     e.preventDefault()
@@ -426,7 +428,6 @@ M.prepare()
 .then(M.prepareRender)
 .then(M.render)
 // .then(M.updateFilter)
-.then(M.initForm)
 .then(M.attachEvents)
 
 
