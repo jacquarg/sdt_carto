@@ -14,6 +14,24 @@ U.groupBy = (list, key) => {
   }, {})
 }
 
+U.putInManyGroupsBy = (list, key) => {
+  const groupItem = (groupKey, item, res) => {
+    if (!(groupKey in res)) {
+      res[groupKey] = []
+    }
+    res[groupKey].push(item)
+  }
+  return list.reduce((res, item) => {
+    if (Array.isArray(item[key])) {
+      item[key].forEach((groupKey) => groupItem(groupKey, item, res))
+    } else {
+      groupItem(item[key], item, res)
+    }
+
+    return res
+  }, {})
+}
+
 ///////////////////////////////////////////////////////////
 
 const typologiesColors = {
@@ -23,7 +41,7 @@ const typologiesColors = {
     {r: 80, g: 141, b: 129},
 
   // label:
-  "Transports" :
+  "Mobilité" :
    // color:
   {r: 78, g: 54, b: 188},
   //
@@ -239,7 +257,7 @@ M.render = () => {
   delete byThematique[undefined]
   autres = autres.concat(byThematique[""] || [])
   delete byThematique[""]
-  byThematique["zAutre"] = autres
+  byThematique["~"] = autres
 
   console.log("2")
   console.log(byThematique)
@@ -248,7 +266,7 @@ M.render = () => {
     $('#documentation').append(thematiqueElem)
     console.log("3")
 
-    const byDefi = U.groupBy(byThematique[thematique].sort((a, b) => a.label < b.label ? -1 : 1 ), "defi")
+    const byDefi = U.putInManyGroupsBy(byThematique[thematique].sort((a, b) => a.label < b.label ? -1 : 1 ), "defi")
     Object.keys(byDefi).sort().forEach((defi) => {
       const defiElem = $(defiTemplate({ defi }))
       thematiqueElem.find('ul.defis').append(defiElem)

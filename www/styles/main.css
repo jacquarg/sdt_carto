@@ -82,6 +82,7 @@ h3 {
   width: 100%;
    z-index: 200;
   position: relative;
+  display: block;
 }
 
 .toolbar {
@@ -90,7 +91,7 @@ h3 {
   line-height: 72px;
   background-size: 100% 100%;
   background-repeat: no-repeat;
-
+  box-shadow: 0px 5px 10px gray;
 }
 
 #collapsed_header {
@@ -159,7 +160,7 @@ h3 {
   display: block;
 }
 */
-#word_filter {
+.word_filter {
   width: 200px;
 
   margin-left: 20px;
@@ -174,17 +175,17 @@ h3 {
   z-index: 2000;
 }
 
-#word_filter_submit {
+.word_filter_submit {
   left: 173px;
   top: 25px;
   z-index: 2001;
-
+  padding: 4px 0;
 }
 
 .personal_filter, .notpersonal_filter {
   height: 40px;
   margin: 0 16px;
-
+  margin-bottom: -8px;
 }
 
 .personal_filter.active, .notpersonal_filter.active {
@@ -197,7 +198,6 @@ h3 {
 
 #period_filter {
   font-size: 20px;
-
 }
 
 
@@ -317,7 +317,7 @@ li.subject {
   line-height: 20px;
   position: absolute;
   top: 210px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .ideationcard .kind {
@@ -336,19 +336,38 @@ li.subject {
   bottom: 40px;
   left: 45px;
   height: 20px;
-  font-size: 10px;
-  line-height: 9px;
+  font-size: 12px;
+  line-height: 10px;
   color: #999;
   position: absolute;
 }
 
-.ideationcard .access {
+.ideationcard .support {
   bottom: 20px;
   left: 20px
   height: 20px;
-  font-size: 15px;
-  line-height: 20px;
+  font-size: 12px;
+  line-height: 10px;
+  color: #999;
   position: absolute;
+}
+.ideationcard .support img {
+  display: inline-block;
+  height: 11px;
+}
+
+.ideationcard .support span {
+  display: inline-block;
+  margin-left: 6px;
+}
+
+.ideationcard .footnotes {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 20px;
+  width: 200px;
+  display: inline-block;
 }
 
 .ideationcard .holder {
