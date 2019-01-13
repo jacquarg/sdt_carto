@@ -554,12 +554,33 @@ li.subject {
 /* Responsive */
 
 @media (max-width: 992px) {
-  .expanded .details {
-    display: block;
-    width: 100%;
-    margin-left: 0;
-  }
 }
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+@page {
+  margin: 15mm;
+}
+
+@media print {
+  html, body {
+    width: 750px;
+    margin: 0mm;
+    padding: 0px;
+    background: #FFF;
+  }
+
+  header {
+    display: none;
+  }
+
+  #container {
+    margin-top: 0px;
+  }
+
+  ul.defis {
+    margin: 0px;
+    padding: 0px;
+  }
+}
