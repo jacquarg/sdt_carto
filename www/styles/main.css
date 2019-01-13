@@ -262,7 +262,6 @@ li.subject {
 
 .datasets li {
   display: inline-block;
-  padding: 20px;
   margin: 10px;
 }
 
@@ -274,25 +273,66 @@ li.subject {
 
 .ideationcard {
   position: relative;
-  width: 270px;
-  height: 380px;
+  width: 200px;
+  height: 300px;
   border: 0.5px solid #eee;
   box-sizing: border-box;
-  padding: 20px;
-
 }
 
 .ideationcard .typology {
   color: white;
   font-family: 'Rubik', sans-serif;
-  font-weight: 900;
+  font-weight: 300;
   font-size: 30px;
   padding: 8px;
   position: absolute;
-  width: 230px;
-  top: 20px;
-  left: 20px;
-  height: 54px;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  height: 16%;
+}
+
+.ideationcard .typology .thematique {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  position: absolute;
+  margin: 4%;
+  top: 0px;
+  left: 0px;
+}
+
+.ideationcard .typology .kind {
+  position: absolute;
+  right: 0px;
+  top:0px;
+  padding: 4%;
+  height: 100%;
+}
+
+.ideationcard .typology .kind img {
+  height: 100%;
+  filter: brightness(100);
+}
+
+.ideationcard .datacontroller {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  padding: 4%;
+  height: 60%;
+  right: 20%;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: "Arvo";
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ideationcard .datacontroller img {
+  height: 100%;
+  margin-right: 4%;
 }
 
 .ideationcard .name {
@@ -301,97 +341,54 @@ li.subject {
   font-family: 'Arvo', serif;
   font-weight: 700;
   color: #555;
-  height: 95px;
-  width: 230px;
+  height: 30%;
+  width: 92%;
+  left: 4%;
+  right: 4%;
   position: absolute;
-  top: 94px;
+  top: 20%;
 }
 
 .ideationcard .name span {
 }
 
 .ideationcard .description {
-  width: 230px;
-  height: 103px;
-  font-size: 15px;
-  line-height: 20px;
+  width: 92%;
+  left: 4%;
+  right: 4%;
+  height: 30%;
+  font-size: 13px;
   position: absolute;
-  top: 210px;
+  top: 54%;
   overflow-y: auto;
 }
 
-.ideationcard .kind {
-  bottom: 40px;
-  height: 20px;
-  font-size: 15px;
-  line-height: 20px;
-  position: absolute;
-}
-
-.ideationcard .kind img {
-  height: 20px;
-}
-
-.ideationcard .datacontroller {
-  bottom: 40px;
-  left: 45px;
-  height: 20px;
-  font-size: 12px;
-  line-height: 10px;
-  color: #999;
-  position: absolute;
-}
 
 .ideationcard .support {
-  bottom: 20px;
-  left: 20px
-  height: 20px;
+  bottom: 0px;
+  left: 0px;
+  height: 12%;
+  width: 100%;
+  padding: 4%;
   font-size: 12px;
   line-height: 10px;
   color: #999;
   position: absolute;
+
 }
 .ideationcard .support img {
-  display: inline-block;
-  height: 11px;
+  display: block;
+  height: 45%;
+  position: absolute;
 }
 
 .ideationcard .support span {
-  display: inline-block;
-  margin-left: 6px;
-}
-
-.ideationcard .footnotes {
-  white-space: nowrap;
+  display: block;
+  margin-left: 12%;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 20px;
-  width: 200px;
-  display: inline-block;
-}
-
-.ideationcard .holder {
-  position: absolute;
-  right: 20px;
-  bottom: 26px;
-  height: 30px;
-}
-
-.ideationcard .frequency {
-  position: absolute;
-  bottom: 26px;
-  left: 19px;
-}
-
-.ideationcard .frequency span {
-  font-size: 12px;
-  color: #999;
-}
-
-.ideationcard .frequency img {
-  width: 23px;
-  color: #999;
-  padding-right: 4px;
+  width: 90%;
+  height: 100%;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * */

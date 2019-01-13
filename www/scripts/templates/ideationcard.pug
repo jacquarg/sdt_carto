@@ -1,15 +1,17 @@
 li.ideationcard
-  .typology(style="background-color: rgb(" + typologyColor.r + "," + typologyColor.g + "," + typologyColor.b + ");")= thematique
+  .typology(style="background-color: rgb(" + typologyColor.r + "," + typologyColor.g + "," + typologyColor.b + ");")
+    .thematique= thematique
+    .kind(title=kind)
+      img(src=kindImgUrl)
+    .datacontroller(title="Responsable de traitement")
+      img(src="img/ideationcard/bank.png")
+      = sourceDataController
+
   .name
     span= label
 
   .description= description
-  .kind(title=kind)
-    img(src=kindImgUrl)
-
-  .datacontroller(title="Responsable de traitement")
-    span.footnotes= sourceDataController
 
   .support(title="Support")
-    img(src="img/ideationcard/support.png")
-    span.footnotes= support
+    img(src="img/ideationcard/file.png")
+    span= support
