@@ -1,18 +1,1 @@
-{
-  "@context": {
-    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-    "schema": "http://schema.org/",
-    "wp": "https://www.wikidata.org/wiki/Property:",
-    "wq": "https://www.wikidata.org/wiki/",
-    "q": "https://wikiapi.org/objects/",
-    "@vocab": "https://wikiapi.org/semantic/vocab:",
-    "label": "rdfs:label",
-    "description": {
-      "@id": "rdfs:comment",
-      "@langage": "fr"
-    },
-    "children": {
-      "@reverse": "rdfs:subClassOf"
-    }
-  }
-}
+{"@context":{"rdfs":"http:\/\/www.w3.org\/2000\/01\/rdf-schema#","schema":"http:\/\/schema.org\/","wp":"https:\/\/www.wikidata.org\/wiki\/Property:","wq":"https:\/\/www.wikidata.org\/wiki\/","q":"https:\/\/wikiapi.org\/objects\/","@vocab":"https:\/\/wikiapi.org\/semantic\/vocab:","label":"rdfs:label","description":{"@id":"rdfs:comment","@langage":"fr"},"children":{"@reverse":"rdfs:subClassOf"}},"q:Qcb89120d-a133-41bd-9503-8499307fa9ea":{"@id":"q:Qcb89120d-a133-41bd-9503-8499307fa9ea","@type":["object","wq:Q1397073"],"description":"ou oui","label":"Test 1","access":"","accessMediator":"","defi":"","information":"","kind":"","portable":"","sourceDataController":"","thematique":"TEE","typology":""},"q:Qb85f3924-f89a-428f-bc2b-ddb29693e89f":{"@id":"q:Qb85f3924-f89a-428f-bc2b-ddb29693e89f","@type":["object","wq:Q1397073"],"description":"ou oui","label":"Test 1","access":"","accessMediator":"","defi":"","information":"","kind":"","portable":"","sourceDataController":"","thematique":"TEE","typology":""},"q:Qe20f839e-f65a-4c9c-8876-1e1e78bd9203":{"@id":"q:Qe20f839e-f65a-4c9c-8876-1e1e78bd9203","@type":["object","wq:Q1397073"],"description":"","label":"Listes des points gps","access":"","accessMediator":"","defi":"","information":"","kind":"","portable":"","sourceDataController":"Google","thematique":"TEE","typology":""},"q:Qee8e7e62-febd-4c13-adb4-b012ae153ca2":{"@id":"q:Qee8e7e62-febd-4c13-adb4-b012ae153ca2","@type":["object","wq:Q1397073"],"description":"","label":"test","access":"","accessMediator":"","defi":"","information":"","kind":"","portable":"","sourceDataController":"Google encore","thematique":"TEE","typology":""}}

@@ -1,21 +1,34 @@
 .modal
   .close X
   form.ideationcard#adddataset(method="post", name="theform", action="")
-    select.typology#inputthematique
-      each t in thematiques
-        option= t
+    .typology(style="background-color: rgb(" + typologyColor.r + "," + typologyColor.g + "," + typologyColor.b + ");")
+      select#inputthematique(name="thematique")
+        each t in thematiques
+          option(value=t)= t
+      .kind(title=kind)
+        label.ok
+          input#kind(type="radio", name="kind", value="personal", checked="checked")
+          img(src="img/ideationcard/personal.png")
+        label.ko
+          input#kind(type="radio", name="kind", value="notpersonal")
+          img(src="img/ideationcard/notpersonal.png")
 
-    input.name#inputname(type="text", placeholder="Inscrivez ici le nom de la donnée")
-    input.description#inputdescription(type="text", placeholder="Précisez ici")
+      .datacontroller(title="Responsable de traitement")
+        img(src="img/ideationcard/bank.png")
+        input#inputsourcedatacontroller(type="text", placeholder="Détenteur *")
 
-    input#inputsourcedatacontroller(type="text", placeholder="Détenteur")
-    input#inputsupport(type="text", placeholder="support")
+    .name
+      input#inputname(type="text", placeholder="Inscrivez ici le nom de la donnée *")
 
-    select#inputnature
-      each t in natures
-        option= t
+    .description
+      textarea#inputdescription(type="text", placeholder="Précisez ici")
 
-    input#inputcomment(type="text", placehoolder="support")
+    .support(title="Support")
+      img(src="img/ideationcard/file.png")
+      input#inputsupport(type="text", placeholder="support")
+
+    textarea#inputcomment(type="text", placeholder="Optionnel : un commentaires complémentaire sur la donnée.")
+
     input(type="submit", name="submit", class="button", id="submit_btn", value="Send")
 
     //-button(type="submit")= Envoyer

@@ -371,12 +371,21 @@ M.initForm = () => {
     ],
     thematiques: [
       "TEE", "Mobilité", "Ados"
-    ]
+    ],
+    typologyColor: typologiesColors["TEE"],
+
   }
   const formElem = $(adddatasetTemplate(formValues))
 
   $('body').append(formElem)
   formElem.find('.close').click((e) => { formElem.remove() })
+
+  $('#inputthematique').change((e) => {
+    console.log(e)
+    let thematique = $('#inputthematique').val()
+    const typologyColor = typologiesColors[thematique]
+    $('#adddataset .typology').css("background-color", "rgb(" + typologyColor.r + "," + typologyColor.g + "," + typologyColor.b + ")")
+  })
 
   $('form#adddataset').submit((e) => {
     e.preventDefault()
@@ -409,6 +418,7 @@ M.initForm = () => {
         data: JSON.stringify(dataset),
         success: (err) => {
           console.log("success body")
+          formElem.remove()
           // PLD.allItems[id] = dataset
           console.log(err)
         },

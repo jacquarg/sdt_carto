@@ -403,6 +403,93 @@ li.subject {
   top: 0;
 }
 
+.modal form {
+  position: absolute;
+  left: 50%;
+  width: 320px;
+  height: 480px;
+  margin-left: -160px;
+  background: #FFF;
+}
+
+#adddataset .typology {
+  background: #AAA;
+}
+
+#adddataset .typology #inputthematique {
+  width: 30%;
+  margin: 3%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+#adddataset .typology .kind {
+  width: 22%;
+}
+
+#adddataset .typology .kind label {
+
+  right: 0px;
+  width: 100%;
+  display: block;
+  position: absolute;
+  height: 45%;
+}
+
+#adddataset .typology .kind label.ok {
+  top: 3%;
+}
+
+#adddataset .typology .kind label.ko {
+  bottom:3%;
+}
+
+#adddataset .typology .kind img {
+  height: 70%;
+}
+
+
+#adddataset .name input {
+  width: 100%;
+}
+
+#adddataset .description {
+  top: 30%;
+  overflow:visible;
+}
+#adddataset .description textarea {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#adddataset .support {
+  top: 60%;
+}
+
+#adddataset .support input {
+  margin-left: 10%;
+}
+
+#adddataset #inputcomment {
+  position: absolute;
+  left: 0px;
+  top: 70%;
+  height: 13%;
+  width: 94%;
+  margin: 3%;
+}
+
+input#submit_btn {
+  position: absolute;
+  left: 50%;
+  bottom: 3%;
+  height: 6%;
+  width: 80px;
+  margin-left: -40px;
+}
+
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* prop tables */
 
