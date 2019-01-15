@@ -185,6 +185,22 @@ M.attachEvents = () => {
     M.updateView()
   })
   $('.add_data').click(M.initForm)
+
+  const toggleScroll = $('#banner').height() - $('#collapsed_header').height()
+  let fixed = false
+  $(window).scroll(() => {
+    if ($(window).scrollTop() > toggleScroll) {
+      if (!fixed) {
+        $('#sidebar').addClass("fix_sidebar")
+        fixed = true
+      }
+    } else {
+      if (fixed) {
+        $('#sidebar').removeClass("fix_sidebar")
+        fixed = false
+      }
+    }
+  })
 }
 
 M.updateView = () => {
@@ -433,13 +449,13 @@ M.initForm = () => {
 
 }
 
-
-M.prepare()
-.then(M.prepareRender)
-.then(M.render)
-// .then(M.updateFilter)
-.then(M.attachEvents)
-
+$(document).ready(() => {
+  M.prepare()
+  .then(M.prepareRender)
+  .then(M.render)
+  // .then(M.updateFilter)
+  .then(M.attachEvents)
+})
 
 // TO move in lib.
 function uuidv4() {

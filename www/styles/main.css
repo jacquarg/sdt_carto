@@ -72,17 +72,31 @@ h3 {
 
 /* Header */
 #expanded_header {
- /* z-index: 200;
-  position: relative;*/
+  background: white;
+  z-index: 200;
+  position: relative;
   /*width: 100%;*/
   /*top: 0px;*/
 }
 
 #expanded_header > img {
-  width: 100%;
-   z-index: 200;
+  width: 50%;
+  z-index: 200;
   position: relative;
-  display: block;
+  display: inline-block;
+}
+
+#banner_right {
+  display: inline-block;
+  width: 48%;
+  z-index: 200;
+  padding: 40px;
+  vertical-align: top;
+
+}
+
+#expanded_header p {
+  font-size: 18px;
 }
 
 .toolbar {
@@ -138,14 +152,38 @@ h3 {
   height: 64px;
 }
 
+
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* sidebar */
+
+#sidebar {
+  float: left;
+  left: 0px;
+  width: 245px;
+  height: 278px;
+  background: url('../img/bg_sidebar.jpg');
+  filter: grayscale(80%);
+}
+
+#sidebar.fix_sidebar {
+  position: fixed;
+  top: 72px;
+  filter: grayscale(0%);
+  /*float: none;*/
+}
+
 .filters {
-  display: inline-block;
+  display: block;
   margin: 0;
   vertical-align: top;
+  padding: 0px;
 }
 
 .filters li {
-  display: inline-block;
+  display: block;
+  margin: 15px;
 }
 
 .thematique_filter {
@@ -156,30 +194,25 @@ h3 {
   padding: 8px;
 }
 
+.thematique_filter input {
+  margin: 5px;
+}
+
 /*label[for=word_filter] {
   display: block;
 }
 */
 .word_filter {
-  width: 200px;
-
-  margin-left: 20px;
-
-  font-size: 18px;
-
-  background: #eee
-  ;
+  width: 150px;
+  font-size: 14px;
+  background: #eee;
   border:  0;
   border-radius: 2px;
   padding: 5px;
-  z-index: 2000;
 }
 
 .word_filter_submit {
-  left: 173px;
-  top: 25px;
-  z-index: 2001;
-  padding: 4px 0;
+  padding: 0px;
 }
 
 .personal_filter, .notpersonal_filter {
@@ -191,6 +224,9 @@ h3 {
 .personal_filter.active, .notpersonal_filter.active {
   filter: brightness(100);
 }
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -232,6 +268,11 @@ label[for=word_filter] {
 
 #container {
   margin-top: 100px;
+  min-height: 100vh;
+}
+
+#documentation {
+  margin-left: 250px;
 }
 
 #documentation > .typology {
