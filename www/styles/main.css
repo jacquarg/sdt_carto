@@ -699,7 +699,8 @@ input#submit_btn {
     background: #FFF;
   }
 
-  header {
+  header,
+  #sidebar {
     display: none;
   }
 
@@ -707,6 +708,9 @@ input#submit_btn {
     margin-top: 0px;
   }
 
+  #documentation {
+    margin-left: 0px;
+  }
   ul.defis {
     margin: 0px;
     padding: 0px;
