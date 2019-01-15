@@ -5,7 +5,7 @@
 //
 // copy the content of source (in the current path), to destination (on the distant ftp path)
 var source = __dirname + "/../www/";
-var destination = "/www/WordPress3/cartographies/datapilote/";
+var destination = "/www/WordPress3/cartographies/data_sdt/";
 
 var FtpDeploy = require('ftp-deploy');
 var ftpDeploy = new FtpDeploy();
