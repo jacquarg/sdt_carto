@@ -286,6 +286,7 @@ label[for=word_filter] {
 #documentation .ideationcard {
   /*cursor: pointer;*/
   display: inline-block;
+  margin: 10px;
 }
 
 ul.datasets {
@@ -688,7 +689,7 @@ input#submit_btn {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 @page {
-  margin: 15mm;
+  margin: 10mm;
 }
 
 @media print {
@@ -711,7 +712,7 @@ input#submit_btn {
   #documentation {
     margin-left: 0px;
   }
-  ul.defis {
+  ul {
     margin: 0px;
     padding: 0px;
   }

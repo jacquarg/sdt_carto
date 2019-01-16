@@ -268,36 +268,44 @@ M.render = () => {
   // render list
   console.log("1")
   $('#documentation').empty()
-  const byThematique = U.groupBy(M.toDisplayDatasets.map((id) => PLD.getItem(id)), "thematique")
-  let autres = []
-  autres = autres.concat(byThematique[undefined] || [])
-  delete byThematique[undefined]
-  autres = autres.concat(byThematique[""] || [])
-  delete byThematique[""]
-  byThematique["~"] = autres
-
-  console.log("2")
-  console.log(byThematique)
-  Object.keys(byThematique).sort().forEach((thematique) => {
-    const thematiqueElem = $(thematiqueTemplate({ thematique }))
-    $('#documentation').append(thematiqueElem)
-    console.log("3")
-
-    const byDefi = U.putInManyGroupsBy(byThematique[thematique].sort((a, b) => a.label < b.label ? -1 : 1 ), "defi")
-    Object.keys(byDefi).sort().forEach((defi) => {
-      const defiElem = $(defiTemplate({ defi }))
-      thematiqueElem.find('ul.defis').append(defiElem)
-      console.log("4")
-
-      byDefi[defi].forEach((dataset) => {
-        const data = dataset.serializeData()
-        defiElem.find('ul.datasets').append(ideationcardTemplate(data))
-        console.log("5")
-
-      })
+  M.toDisplayDatasets
+    .forEach((id) => {
+      const dataset = PLD.getItem(id)
+      console.log("toto")
+      console.log(dataset)
+      $('#documentation').append(ideationcardTemplate(dataset.serializeData()))
     })
 
-  })
+  // const byThematique = U.groupBy(M.toDisplayDatasets.map((id) => PLD.getItem(id)), "thematique")
+  // let autres = []
+  // autres = autres.concat(byThematique[undefined] || [])
+  // delete byThematique[undefined]
+  // autres = autres.concat(byThematique[""] || [])
+  // delete byThematique[""]
+  // byThematique["~"] = autres
+  //
+  // console.log("2")
+  // console.log(byThematique)
+  // Object.keys(byThematique).sort().forEach((thematique) => {
+  //   const thematiqueElem = $(thematiqueTemplate({ thematique }))
+  //   $('#documentation').append(thematiqueElem)
+  //   console.log("3")
+  //
+  //   const byDefi = U.putInManyGroupsBy(byThematique[thematique].sort((a, b) => a.label < b.label ? -1 : 1 ), "defi")
+  //   Object.keys(byDefi).sort().forEach((defi) => {
+  //     const defiElem = $(defiTemplate({ defi }))
+  //     thematiqueElem.find('ul.defis').append(defiElem)
+  //     console.log("4")
+  //
+  //     byDefi[defi].forEach((dataset) => {
+  //       const data = dataset.serializeData()
+  //       defiElem.find('ul.datasets').append(ideationcardTemplate(data))
+  //       console.log("5")
+  //
+  //     })
+  //   })
+  //
+  // })
   $('.name').textfill({ maxFontPixels: 30, });
 
   //
