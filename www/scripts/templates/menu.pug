@@ -1,0 +1,35 @@
+ul.filters
+  li
+    input.word_filter(title="Filtrer les données", type='text', placeholder="Filtrer par mot-clé", value=q)
+    button.word_filter_submit Q
+  li
+    img.personal_filter(title="Données personnelles", src="./img/ideationcard/personal.png")
+    img.notpersonal_filter(title="Données personnelles", src="./img/ideationcard/notpersonal.png")
+
+    li
+      label
+        input(type="radio", name="sort", value="random", checked=sortBy.random)
+        | Non-classé
+
+  li
+    label
+      input(type="radio", name="sort", value="thematic", checked=sortBy.thematic)
+      | Classer par thématiques
+  each val in thematic
+    li
+      label.thematique_filter
+        input(name="thematique", value=val.label, type="checkbox", checked=val.checked)
+        = val.label
+
+  li
+    label
+      input(type="radio", name="sort", value="datacontroller", checked=sortBy.datacontroller)
+      | Classer par détenteur de données
+
+  each val in datacontroller
+    label.thematique_filter
+    input(name="datacontroller", value=val.label, type="checkbox", checked=val.checked)
+    = val.label
+
+  li
+    button.add_data ajouter une donnée

@@ -114,39 +114,53 @@ class MetaObject {
   }
 }
 
-class ThematicObject {
-  constructor(attrs) {
-    $.extend(this, attrs)
-  }
+// class Filters {
+//   M.filters = {
+//     thematic: [],
+//     datacontroller: [],
+//     q: null,
+//     personal: true,
+//     notpersonal: true,
+//   }
+//
+//
+//   constructor() {
+//
+//   }
+// }
 
-  serializeData() {
-  }
-
-  get allProperties () {
-    let props = []
-    if (this.hasProperty) {
-      PLD.mapOnObject(this.hasProperty, (prop) => props.push(prop))
-    }
-
-    if (this.hasOptionalProperty) {
-      PLD.mapOnObject(this.hasOptionalProperty, (prop) => props.push(prop))
-    }
-    return props
-  }
-}
+// class ThematicObject {
+//   constructor(attrs) {
+//     $.extend(this, attrs)
+//   }
+//
+//   serializeData() {
+//   }
+//
+//   get allProperties () {
+//     let props = []
+//     if (this.hasProperty) {
+//       PLD.mapOnObject(this.hasProperty, (prop) => props.push(prop))
+//     }
+//
+//     if (this.hasOptionalProperty) {
+//       PLD.mapOnObject(this.hasOptionalProperty, (prop) => props.push(prop))
+//     }
+//     return props
+//   }
+// }
 
 const M = {}
 
 M.prepare = () => {
   // Prepare filters
   M.filters = {
-    thematic: {
-    },
-    datacontroller: {
-    },
+    thematic: {},
+    datacontroller: [],
     q: null,
     personal: true,
     notpersonal: true,
+    sortBy: "random",
   }
 
 
@@ -182,10 +196,16 @@ M.prepare = () => {
 
     //const defis = PLD.listInstanceOf("defiItem")
     M.thematics = PLD.listInstanceOf("thematicItem")
-    M.datacontrollers = M.datasets.values().reduce((acc, it) => {
-      acc[it.sourceDataController] = true
+    M.datacontrollers = Object.values(M.datasets).reduce((acc, it) => {
+      acc[it.sourceDataController] = (acc[it.sourceDataController] || 0) + 1
+      return acc
     }, {})
 
+    M.filters.thematic = M.thematics.reduce((acc, it) => {
+      acc[it.label] = it
+      return acc
+    }, {}) //
+    M.filters.datacontroller = Object.entries(M.datacontrollers).sort(kv => kv[1]).map(kv => ({ label: kv[0], checked: false }))
   })
 }
 
@@ -195,9 +215,11 @@ M.attachEvents = () => {
     M.filters.q = $(e.target).val()
     M.updateView()
   })
-  $('input:checkbox').change((e) => {
+  $('input:checkbox[name="thematique"]').change((e) => {
     e.preventDefault()
-    M.filters.thematique[e.target.value] = !M.filters.thematique[e.target.value]
+    console.log(e)
+    M.filters.thematic[e.target.value].checked = !M.filters.thematic[e.target.value].checked
+
     M.updateView()
   })
   $('.personal_filter').click((e) => {
@@ -231,14 +253,25 @@ M.attachEvents = () => {
 
 M.updateMenuView = () => {
   // Build thematic menu
-  Object.values(M.thematic).sort(it => it.name).forEach((it) => {
-    const thematicElem = thematicMenuTemplate(it.serializeData())
+
+  const menuElem = menuTemplate({
+    thematic: Object.values(M.filters.thematic).sort(it => it.label),
+    datacontroller: M.filters.datacontroller,
+    q: M.filters.q,
+    personal: (M.filters.personal) ? "active" : "",
+    notpersonal: (M.filters.notpersonal) ? "active" : "",
+    sortBy: {
+      random: M.filters.sortBy == "random",
+      thematic: M.filters.sortBy == "thematic",
+      datacontroller: M.filters.sortBy == "datacontroller",
+    },
   })
-
-
+  $("#sidebar").empty()
+  $("#sidebar").append(menuElem)
 }
 
 M.updateView = () => {
+  M.updateMenuView()
   if (M.isUpdating) {
     M.shouldRefresh = true
   } else {
@@ -494,6 +527,7 @@ M.initForm = () => {
 
 $(document).ready(() => {
   M.prepare()
+  .then(M.updateMenuView)
   .then(M.prepareRender)
   .then(M.render)
   // .then(M.updateFilter)
