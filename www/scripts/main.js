@@ -114,16 +114,35 @@ class MetaObject {
   }
 }
 
+class ThematicObject {
+  constructor(attrs) {
+    $.extend(this, attrs)
+  }
+
+  serializeData() {
+  }
+
+  get allProperties () {
+    let props = []
+    if (this.hasProperty) {
+      PLD.mapOnObject(this.hasProperty, (prop) => props.push(prop))
+    }
+
+    if (this.hasOptionalProperty) {
+      PLD.mapOnObject(this.hasOptionalProperty, (prop) => props.push(prop))
+    }
+    return props
+  }
+}
 
 const M = {}
 
 M.prepare = () => {
   // Prepare filters
   M.filters = {
-    thematique: {
-      tee: true,
-      ados: true,
-      mobilite: true
+    thematic: {
+    },
+    datacontroller: {
     },
     q: null,
     personal: true,
@@ -160,6 +179,13 @@ M.prepare = () => {
     PLD.mapClassOnType['object'] = MetaObject
 
     M.datasets = PLD.listInstanceOf("wq:Q1397073")
+
+    //const defis = PLD.listInstanceOf("defiItem")
+    M.thematics = PLD.listInstanceOf("thematicItem")
+    M.datacontrollers = M.datasets.values().reduce((acc, it) => {
+      acc[it.sourceDataController] = true
+    }, {})
+
   })
 }
 
@@ -203,6 +229,15 @@ M.attachEvents = () => {
   })
 }
 
+M.updateMenuView = () => {
+  // Build thematic menu
+  Object.values(M.thematic).sort(it => it.name).forEach((it) => {
+    const thematicElem = thematicMenuTemplate(it.serializeData())
+  })
+
+
+}
+
 M.updateView = () => {
   if (M.isUpdating) {
     M.shouldRefresh = true
@@ -222,7 +257,6 @@ M.updateView = () => {
 M.prepareRender = () => {
   M.toDisplayDatasets = M.datasets.slice()
   console.log(M.toDisplayDatasets)
-
   // Filter by keyword
   console.log('toto')
   let q = M.filters.q
@@ -239,6 +273,7 @@ M.prepareRender = () => {
       const personal = it.kind && it.kind.toLowerCase().indexOf("personnelle") != -1
       return M.filters.personal && personal || M.filters.notpersonal && !personal
   })
+
 
 
   // Filter by thematique
